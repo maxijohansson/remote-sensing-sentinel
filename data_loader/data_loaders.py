@@ -14,3 +14,9 @@ class MnistDataLoader(BaseDataLoader):
         self.data_dir = data_dir
         self.dataset = datasets.MNIST(self.data_dir, train=training, download=True, transform=trsfm)
         super().__init__(self.dataset, batch_size, shuffle, validation_split, num_workers)
+
+class SentinelDataLoader(BaseDataLoader):
+    '''
+    Loads the images from ../data/. each image is an ndarray with shape 14x512x512. 
+    The first 13 arrays are the optical bands from Sentinel-L2A and the 14th is the land cover mask with 25 categories from Naturvårdsverket
+    '''
