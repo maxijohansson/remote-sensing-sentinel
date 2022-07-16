@@ -5,20 +5,6 @@ from torch.utils.data import Dataset
 from torchvision.transforms import Compose
 import matplotlib.pyplot as plt
 
-
-class ToTensor(object):
-    """Convert ndarrays in sample to Tensors."""
-
-    def __call__(self, sample):
-        image, mask = sample['image'], sample['mask']
-
-        # swap color axis because
-        # numpy image: H x W x C
-        # torch image: C x H x W
-        image = image.transpose((2, 0, 1))
-        return {'image': torch.from_numpy(image),
-                'mask': torch.from_numpy(mask)}
-
 class SentinelLandCoverSwedenDataset(Dataset):
     '''
     In the data files, the first 13 rows/arrays are the optical bands from Sentinel-L2A and the 14th is the land cover mask with 25 categories from Naturvårdsverket
@@ -44,19 +30,19 @@ class SentinelLandCoverSwedenDataset(Dataset):
         return sample
 
     
-if __name__ =='__main__':
-    sentinel_dataset = SentinelLandCoverSwedenDataset(
-        data_dir = 'data\\SentinelLandCoverSweden\\dataset',
-        transform = Compose([
-            ToTensor()
-        ])
-    )
+# if __name__ =='__main__':
+    # sentinel_dataset = SentinelLandCoverSwedenDataset(
+    #     data_dir = 'data\\SentinelLandCoverSweden\\dataset',
+    #     transform = Compose([
+    #         ToTensor()
+    #     ])
+    # )
 
-    for i in range(len(sentinel_dataset)):
-        sample = sentinel_dataset[i]
+    # for i in range(len(sentinel_dataset)):
+    #     sample = sentinel_dataset[i]
 
-        print(i, sample['image'].shape, sample['mask'].shape)
+    #     print(i, sample['image'].shape, sample['mask'].shape)
     
-        if i == 3:
-            plt.show()
-            break
+    #     if i == 3:
+    #         plt.show()
+    #         break
